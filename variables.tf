@@ -6,7 +6,7 @@ variable "src_dir" {
     description = "The source code directory"
 }
 
-variable "memory" {
+variable "memory_size" {
     default = 256
-    description = "The memory to allocate"
+    description = "The memory size to allocate"
 }

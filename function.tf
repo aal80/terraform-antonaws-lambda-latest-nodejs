@@ -11,4 +11,5 @@ resource "aws_lambda_function" "function" {
     filename = data.archive_file.function_zip.output_path
     source_code_hash = data.archive_file.function_zip.output_base64sha256
     runtime = "nodejs18.x"
+	memory_size = var.memory_size
 }
