@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "assume_role" {
+data "aws_iam_policy_document" "assume_role_policy" {
   statement {
     effect = "Allow"
 
@@ -12,7 +12,11 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "execution_role" {
-  name               = "${}"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  name = "${var.function_name}_role"
+  assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 }
 
+resource "aws_iam_role_policy_attachment" "basic-lambda-role" {
+  role = aws_iam_role.execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
